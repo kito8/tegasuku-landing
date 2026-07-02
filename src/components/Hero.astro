@@ -1,0 +1,32 @@
+---
+import DownloadButton from "./DownloadButton.astro";
+import { VERSION, RELEASES_URL } from "../data/site";
+---
+
+<section class="bg-bg">
+  <div class="mx-auto flex max-w-5xl flex-col items-center px-6 py-20 text-center sm:py-28">
+    <img
+      src="/icon.png"
+      alt="tegasuku アプリアイコン"
+      width="88"
+      height="88"
+      class="mb-8 h-20 w-20 rounded-2xl shadow-sm sm:h-24 sm:w-24"
+    />
+    <h1 class="max-w-3xl text-4xl font-bold leading-tight tracking-tight text-ink sm:text-5xl">
+      Zoomのスライドを、自動で。<br class="hidden sm:block" />あなたのMacの中だけで。
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-subtle">
+      説明会や研修で共有されるスライドを、切り替わった瞬間に自動でキャプチャ。クラウド送信なし、完全ローカルで完結。
+    </p>
+    <div class="mt-10 flex flex-col items-center gap-4">
+      <DownloadButton />
+      <p class="text-sm text-subtle">無料・Apple Silicon (arm64) 対応 · v{VERSION}</p>
+      <a
+        href={RELEASES_URL}
+        class="text-sm font-medium text-accent underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+      >
+        GitHubで詳細を見る →
+      </a>
+    </div>
+  </div>
+</section>

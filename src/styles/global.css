@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+/*
+ * デザイントークン（docs/tegasuku-landing-plan.md セクション4）。
+ * Tailwind v4 では @theme に CSS 変数を置くと、そのままユーティリティになる。
+ * 例: --color-accent → text-accent / bg-accent / border-accent
+ */
+@theme {
+  /* フォント: システムフォント優先（Mac 純正アプリ風のクリーン系） */
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", "Hiragino Sans",
+    "Noto Sans JP", "Helvetica Neue", Arial, sans-serif;
+
+  /* カラー */
+  --color-ink: #0b0b0f; /* 本文・見出し */
+  --color-subtle: #5b5b66; /* 補足テキスト */
+  --color-bg: #ffffff; /* 背景（既定） */
+  --color-bg-alt: #f6f7f9; /* 背景（交互セクション） */
+  --color-accent: #2563eb; /* DLボタン・リンク・強調 */
+  --color-accent-ink: #1e4fd1; /* accent ホバー */
+  --color-line: #e6e7eb; /* 境界線 */
+}
+
+/* ベーススタイル */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* モーション低減の尊重（アクセシビリティ） */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

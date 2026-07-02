@@ -1,0 +1,37 @@
+---
+const shots = [
+  { src: "/screenshots/roi.png", alt: "スライド領域（ROI）を選択している画面" },
+  {
+    src: "/screenshots/capture.png",
+    alt: "自動キャプチャ中のサムネイル一覧画面",
+  },
+  {
+    src: "/screenshots/manage-pdf.png",
+    alt: "撮影した画像を管理し PDF 出力する画面",
+  },
+];
+---
+
+<section class="bg-bg">
+  <div class="mx-auto max-w-5xl px-6 py-20 sm:py-28">
+    <h2 class="text-center text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+      画面イメージ
+    </h2>
+    <div class="mt-12 grid gap-8 sm:grid-cols-3">
+      {
+        shots.map((s) => (
+          <figure class="overflow-hidden rounded-2xl border border-line bg-bg-alt shadow-sm">
+            <img
+              src={s.src}
+              alt={s.alt}
+              width="1280"
+              height="800"
+              loading="lazy"
+              class="aspect-[16/10] w-full object-cover"
+            />
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>

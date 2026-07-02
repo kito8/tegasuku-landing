@@ -1,0 +1,23 @@
+---
+import { AUTHOR, RELEASES_URL, SITE_NAME } from "../data/site";
+
+// 年号はビルド時に固定文字列で埋める（docs 指定）
+const YEAR = "2026";
+---
+
+<footer class="border-t border-line bg-bg-alt">
+  <div
+    class="mx-auto flex max-w-5xl flex-col items-center gap-4 px-6 py-12 text-center text-sm text-subtle sm:flex-row sm:justify-between sm:text-left"
+  >
+    <p>© {YEAR} {AUTHOR}. All rights reserved.</p>
+    <nav class="flex items-center gap-6">
+      <a
+        href={RELEASES_URL}
+        class="font-medium text-ink underline-offset-4 hover:text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-alt"
+      >
+        GitHub
+      </a>
+      <span>{SITE_NAME}</span>
+    </nav>
+  </div>
+</footer>

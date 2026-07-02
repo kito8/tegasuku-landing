@@ -1,0 +1,38 @@
+---
+const faqs = [
+  {
+    q: "データは外部に送信されますか？",
+    a: "いいえ。画像はすべてあなたのMac内（~/Documents/ZoomCapture/）に保存され、クラウド送信・アカウント登録・インターネット接続は不要です。",
+  },
+  {
+    q: "App Store にありますか？",
+    a: "いいえ。画面収録機能が App Store のサンドボックスと相性が悪いため、Apple の公証を受けた DMG で直接配布しています。",
+  },
+  {
+    q: "料金はかかりますか？",
+    a: "無料です。",
+  },
+  {
+    q: "Zoom 以外でも使えますか？",
+    a: "画面上の任意のウィンドウ領域を対象にできるため、他の会議ツールでも動作します（主眼は Zoom の説明会）。",
+  },
+];
+---
+
+<section class="bg-bg">
+  <div class="mx-auto max-w-3xl px-6 py-20 sm:py-28">
+    <h2 class="text-center text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+      よくある質問
+    </h2>
+    <dl class="mt-12 divide-y divide-line">
+      {
+        faqs.map((f) => (
+          <div class="py-6">
+            <dt class="text-base font-semibold text-ink">Q. {f.q}</dt>
+            <dd class="mt-2 text-sm leading-relaxed text-subtle">A. {f.a}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>
