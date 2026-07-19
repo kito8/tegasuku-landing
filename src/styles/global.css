@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /*
- * デザイントークン（docs/tegasuku-landing-plan.md セクション4）。
+ * デザイントークン（docs/tegasuku-landing-plan.md セクション4 を土台に T4 で拡張）。
  * Tailwind v4 では @theme に CSS 変数を置くと、そのままユーティリティになる。
  * 例: --color-accent → text-accent / bg-accent / border-accent
  */
@@ -10,15 +10,19 @@
   --font-sans:
     -apple-system, BlinkMacSystemFont, "SF Pro Text", "Hiragino Sans",
     "Noto Sans JP", "Helvetica Neue", Arial, sans-serif;
+  /* 等幅: 技術トークン（パス・ショートカット・仕様値）専用 */
+  --font-mono:
+    ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
 
   /* カラー */
   --color-ink: #0b0b0f; /* 本文・見出し */
   --color-subtle: #5b5b66; /* 補足テキスト */
   --color-bg: #ffffff; /* 背景（既定） */
   --color-bg-alt: #f6f7f9; /* 背景（交互セクション） */
-  --color-accent: #2563eb; /* DLボタン・リンク・強調 */
+  --color-accent: #2563eb; /* DLボタン・リンク・強調（アイコンの青に整合） */
   --color-accent-ink: #1e4fd1; /* accent ホバー */
   --color-line: #e6e7eb; /* 境界線 */
+  --color-sel: #eef3ff; /* ROI 選択のうすい青（signature 用） */
 }
 
 /* ベーススタイル */
@@ -35,6 +39,10 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  ::selection {
+    background: var(--color-sel);
+  }
+
   /* モーション低減の尊重（アクセシビリティ） */
   @media (prefers-reduced-motion: reduce) {
     html {
@@ -48,5 +56,113 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
+  }
+}
+
+@layer components {
+  /*
+   * signature = ROI（関心領域）キャプチャフレーム。
+   * 「矩形を選んで変化を撮る」という製品の本質を、コーナーマークと選択ラベルで表現する。
+   */
+
+  /* セクション見出しの上に置く小ラベル。左肩に ROI コーナーの目印を付ける。
+     日本語を出すため sans（mono は日本語グリフ無し）。 */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--color-accent);
+  }
+  .eyebrow::before {
+    content: "";
+    display: block;
+    width: 0.7rem;
+    height: 0.7rem;
+    border-left: 2px solid currentColor;
+    border-top: 2px solid currentColor;
+  }
+
+  /* インラインの等幅トークン（パス・ショートカット・仕様値など Latin のみ）。 */
+  .tok {
+    font-family: var(--font-mono);
+    font-size: 0.82em;
+    font-weight: 500;
+    background: var(--color-sel);
+    color: var(--color-accent-ink);
+    padding: 0.08em 0.42em;
+    border-radius: 0.35rem;
+    white-space: nowrap;
+  }
+
+  /* サーフェイスカード。hover で静かに持ち上がる。 */
+  .card {
+    border: 1px solid var(--color-line);
+    background: var(--color-bg);
+    border-radius: 1rem;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+  }
+  .card-hover:hover {
+    border-color: color-mix(in srgb, var(--color-accent) 38%, var(--color-line));
+    box-shadow: 0 10px 30px -18px rgb(37 99 235 / 0.35);
+    transform: translateY(-3px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card-hover:hover {
+      transform: none;
+    }
+  }
+
+  /* ROI コーナーマーク（Hero を囲む選択枠の signature）。 */
+  .roi-corner {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border: 2px solid color-mix(in srgb, var(--color-accent) 55%, transparent);
+    pointer-events: none;
+  }
+  .roi-tl {
+    top: 0;
+    left: 0;
+    border-right: 0;
+    border-bottom: 0;
+  }
+  .roi-tr {
+    top: 0;
+    right: 0;
+    border-left: 0;
+    border-bottom: 0;
+  }
+  .roi-bl {
+    bottom: 0;
+    left: 0;
+    border-right: 0;
+    border-top: 0;
+  }
+  .roi-br {
+    bottom: 0;
+    right: 0;
+    border-left: 0;
+    border-top: 0;
+  }
+
+  /* Hero 入場（1回だけ・reduced-motion では無効化）。 */
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .rise {
+    animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 }

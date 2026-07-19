@@ -1,34 +1,61 @@
 ---
 const shots = [
-  { src: "/screenshots/roi.png", alt: "スライド領域（ROI）を選択している画面" },
+  {
+    src: "/screenshots/roi.png",
+    alt: "スライド領域（ROI）を選択している画面",
+    tag: "roi",
+    caption: "スライド領域を選択",
+  },
   {
     src: "/screenshots/capture.png",
     alt: "自動キャプチャ中のサムネイル一覧画面",
+    tag: "capture",
+    caption: "自動でキャプチャ",
   },
   {
     src: "/screenshots/manage-pdf.png",
     alt: "撮影した画像を管理し PDF 出力する画面",
+    tag: "pdf",
+    caption: "PDF に書き出し",
   },
 ];
 ---
 
 <section class="bg-bg">
   <div class="mx-auto max-w-5xl px-6 py-20 sm:py-28">
-    <h2 class="text-center text-2xl font-bold tracking-tight text-ink sm:text-3xl">
-      画面イメージ
-    </h2>
+    <header class="max-w-2xl">
+      <p class="eyebrow">画面</p>
+      <h2 class="mt-3 text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+        画面イメージ
+      </h2>
+    </header>
     <div class="mt-12 grid gap-8 sm:grid-cols-3">
       {
         shots.map((s) => (
-          <figure class="overflow-hidden rounded-2xl border border-line bg-bg-alt shadow-sm">
-            <img
-              src={s.src}
-              alt={s.alt}
-              width="1280"
-              height="800"
-              loading="lazy"
-              class="aspect-[16/10] w-full object-cover"
-            />
+          <figure class="card card-hover overflow-hidden">
+            <div class="relative bg-bg-alt">
+              <img
+                src={s.src}
+                alt={s.alt}
+                width="1280"
+                height="800"
+                loading="lazy"
+                class="aspect-[16/10] w-full object-cover"
+              />
+              <div
+                class="pointer-events-none absolute inset-2.5 hidden sm:block"
+                aria-hidden="true"
+              >
+                <span class="roi-corner roi-tl" />
+                <span class="roi-corner roi-tr" />
+                <span class="roi-corner roi-bl" />
+                <span class="roi-corner roi-br" />
+              </div>
+            </div>
+            <figcaption class="flex items-center gap-2 border-t border-line px-4 py-3 text-xs text-subtle">
+              <span class="tok">{s.tag}</span>
+              <span>{s.caption}</span>
+            </figcaption>
           </figure>
         ))
       }

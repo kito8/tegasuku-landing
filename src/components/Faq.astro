@@ -21,15 +21,21 @@ const faqs = [
 
 <section class="bg-bg">
   <div class="mx-auto max-w-3xl px-6 py-20 sm:py-28">
-    <h2 class="text-center text-2xl font-bold tracking-tight text-ink sm:text-3xl">
-      よくある質問
-    </h2>
-    <dl class="mt-12 divide-y divide-line">
+    <header>
+      <p class="eyebrow">FAQ</p>
+      <h2 class="mt-3 text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+        よくある質問
+      </h2>
+    </header>
+    <dl class="mt-10 divide-y divide-line border-t border-line">
       {
         faqs.map((f) => (
           <div class="py-6">
-            <dt class="text-base font-semibold text-ink">Q. {f.q}</dt>
-            <dd class="mt-2 text-sm leading-relaxed text-subtle">A. {f.a}</dd>
+            <dt class="flex gap-2 text-base font-semibold text-ink">
+              <span class="font-mono text-accent">Q</span>
+              <span>{f.q}</span>
+            </dt>
+            <dd class="mt-2 pl-6 text-sm leading-relaxed text-subtle">{f.a}</dd>
           </div>
         ))
       }

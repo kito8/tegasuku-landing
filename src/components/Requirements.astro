@@ -1,44 +1,50 @@
 ---
 import DownloadButton from "./DownloadButton.astro";
-
-const steps = [
-  "DMG をダウンロード",
-  "DMG を開き Tegasuku.app を /Applications へドラッグ",
-  "起動（公証済みのためダブルクリックで開けます。※未公証配布の暫定期間中は「右クリック →『開く』」）",
-];
 ---
 
 <section class="bg-bg-alt">
   <div class="mx-auto max-w-5xl px-6 py-20 sm:py-28">
-    <h2 class="text-center text-2xl font-bold tracking-tight text-ink sm:text-3xl">
-      動作環境・インストール
-    </h2>
+    <header class="max-w-2xl">
+      <p class="eyebrow">動作環境</p>
+      <h2 class="mt-3 text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+        動作環境・インストール
+      </h2>
+    </header>
     <div class="mt-12 grid gap-8 sm:grid-cols-2">
-      <div class="rounded-2xl border border-line bg-bg p-8">
+      <div class="card p-8">
         <h3 class="text-lg font-semibold text-ink">動作環境</h3>
         <ul class="mt-4 space-y-3 text-sm leading-relaxed text-subtle">
           <li>
-            対応OS: <span class="font-medium text-ink">macOS（Apple Silicon / arm64）</span>。Intel
-            Mac は今後対応予定（当面は Rosetta 2 で動作）。
+            対応OS: <span class="font-medium text-ink">macOS（Apple Silicon</span>
+            / <span class="tok">arm64</span><span class="font-medium text-ink"
+              >）</span
+            >。Intel Mac は今後対応予定（当面は Rosetta 2 で動作）。
           </li>
           <li>
-            初回に必要な権限: <span class="font-medium text-ink">画面収録</span> と <span
-              class="font-medium text-ink">アクセシビリティ</span
+            初回に必要な権限: <span class="font-medium text-ink">画面収録</span> と
+            <span class="font-medium text-ink">アクセシビリティ</span
             >（システム設定 → プライバシーとセキュリティ）。
           </li>
         </ul>
       </div>
-      <div class="rounded-2xl border border-line bg-bg p-8">
+      <div class="card p-8">
         <h3 class="text-lg font-semibold text-ink">インストール手順</h3>
         <ol class="mt-4 space-y-3 text-sm leading-relaxed text-subtle">
-          {
-            steps.map((s, i) => (
-              <li class="flex gap-3">
-                <span class="font-semibold text-accent">{i + 1}.</span>
-                <span>{s}</span>
-              </li>
-            ))
-          }
+          <li class="flex gap-3">
+            <span class="font-mono font-semibold text-accent">1</span>
+            <span>DMG をダウンロード。</span>
+          </li>
+          <li class="flex gap-3">
+            <span class="font-mono font-semibold text-accent">2</span>
+            <span
+              >DMG を開き、Tegasuku.app を <span class="tok">/Applications</span>
+              へドラッグ。</span
+            >
+          </li>
+          <li class="flex gap-3">
+            <span class="font-mono font-semibold text-accent">3</span>
+            <span>起動。初回のみ右クリック →『開く』を選ぶ場合があります。</span>
+          </li>
         </ol>
       </div>
     </div>

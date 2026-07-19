@@ -17,7 +17,7 @@ export const RELEASES_URL = `https://github.com/${RELEASES_REPO}/releases`;
 export const DOWNLOAD_URL = `https://github.com/${RELEASES_REPO}/releases/latest/download/Tegasuku-arm64.dmg`;
 
 /** アプリのバージョン（package.json の version と揃える） */
-export const VERSION = "0.2.0";
+export const VERSION = "0.3.1";
 
 /** 作者名 */
 export const AUTHOR = "Koki Ito";

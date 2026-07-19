@@ -1,0 +1,6 @@
+# Cloudflare Pages 設定（T6）。
+# デプロイ: `npm run build` で dist/ を生成後、`npx wrangler pages deploy dist`
+# （事前に `npx wrangler login` が必要 = Cloudflare アカウントでのログイン）。
+name = "tegasuku"
+compatibility_date = "2024-11-01"
+pages_build_output_dir = "dist"

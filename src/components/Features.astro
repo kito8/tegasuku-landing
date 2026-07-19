@@ -2,18 +2,22 @@
 const features = [
   {
     title: "ローカル完結・プライバシー重視",
-    body: "画像は ~/Documents/ZoomCapture/ に PNG 保存。外部送信・アカウント登録・ネット接続は一切不要。機密性の高い会議でも安心。",
+    spec: "~/Documents/ZoomCapture/",
+    body: "画像はあなたのMac内に PNG 保存。外部送信・アカウント登録・ネット接続は一切不要。機密性の高い会議でも安心。",
   },
   {
     title: "差分検知で自動キャプチャ",
+    spec: "diff > 5%",
     body: "ピクセル差分率（既定5%超）を検知し、スライドが切り替わった瞬間だけ保存。手動操作なしで見逃しゼロ・重複なし。",
   },
   {
     title: "ROI（関心領域）指定",
+    spec: "ROI",
     body: "スライドが映る矩形領域だけを対象に。カメラ映像やチャット欄の変化には反応しない高精度キャプチャ。",
   },
   {
     title: "ワンクリックPDF出力",
+    spec: "→ PDF",
     body: "セッション内の全画像を1つのPDFへ書き出し。会議終了後すぐ資料として配布・保存できる。",
   },
 ];
@@ -21,14 +25,20 @@ const features = [
 
 <section class="bg-bg">
   <div class="mx-auto max-w-5xl px-6 py-20 sm:py-28">
-    <h2 class="text-center text-2xl font-bold tracking-tight text-ink sm:text-3xl">
-      主な特徴
-    </h2>
+    <header class="max-w-2xl">
+      <p class="eyebrow">特徴</p>
+      <h2 class="mt-3 text-2xl font-bold tracking-tight text-ink sm:text-3xl">
+        主な特徴
+      </h2>
+    </header>
     <div class="mt-12 grid gap-6 sm:grid-cols-2">
       {
         features.map((f) => (
-          <div class="rounded-2xl border border-line bg-bg p-8 shadow-sm">
-            <h3 class="text-lg font-semibold text-ink">{f.title}</h3>
+          <div class="card card-hover p-8">
+            <div class="flex items-start justify-between gap-4">
+              <h3 class="text-lg font-semibold text-ink">{f.title}</h3>
+              <span class="tok mt-0.5 shrink-0">{f.spec}</span>
+            </div>
             <p class="mt-3 text-sm leading-relaxed text-subtle">{f.body}</p>
           </div>
         ))

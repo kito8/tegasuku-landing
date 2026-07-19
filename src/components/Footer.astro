@@ -7,17 +7,27 @@ const YEAR = "2026";
 
 <footer class="border-t border-line bg-bg-alt">
   <div
-    class="mx-auto flex max-w-5xl flex-col items-center gap-4 px-6 py-12 text-center text-sm text-subtle sm:flex-row sm:justify-between sm:text-left"
+    class="mx-auto flex max-w-5xl flex-col gap-4 px-6 py-12 text-sm text-subtle sm:flex-row sm:items-center sm:justify-between"
   >
-    <p>© {YEAR} {AUTHOR}. All rights reserved.</p>
-    <nav class="flex items-center gap-6">
+    <div class="flex items-center gap-3">
+      <img
+        src="/icon.png"
+        alt=""
+        width="28"
+        height="28"
+        aria-hidden="true"
+        class="h-7 w-7 [filter:drop-shadow(0_2px_4px_rgb(2_6_23/0.15))]"
+      />
+      <span class="font-semibold text-ink">{SITE_NAME}</span>
+      <span>© {YEAR} {AUTHOR}</span>
+    </div>
+    <nav>
       <a
         href={RELEASES_URL}
         class="font-medium text-ink underline-offset-4 hover:text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg-alt"
       >
         GitHub
       </a>
-      <span>{SITE_NAME}</span>
     </nav>
   </div>
 </footer>
