@@ -1,5 +1,6 @@
 ---
 import DownloadButton from "./DownloadButton.astro";
+import { GUIDE_URL } from "../data/site";
 ---
 
 <section class="bg-bg-alt">
@@ -15,15 +16,15 @@ import DownloadButton from "./DownloadButton.astro";
         <h3 class="text-lg font-semibold text-ink">動作環境</h3>
         <ul class="mt-4 space-y-3 text-sm leading-relaxed text-subtle">
           <li>
-            対応OS: <span class="font-medium text-ink">macOS（Apple Silicon</span>
-            / <span class="tok">arm64</span><span class="font-medium text-ink"
-              >）</span
-            >。Intel Mac は今後対応予定（当面は Rosetta 2 で動作）。
+            対応OS: <span class="font-medium text-ink">macOS 11 以降</span>／<span
+              class="font-medium text-ink">Apple Silicon</span
+            >
+            専用（<span class="tok">arm64</span>）。Intel Mac には非対応です。
           </li>
           <li>
-            初回に必要な権限: <span class="font-medium text-ink">画面収録</span> と
-            <span class="font-medium text-ink">アクセシビリティ</span
-            >（システム設定 → プライバシーとセキュリティ）。
+            初回に必要な権限は <span class="font-medium text-ink">画面収録</span
+            >
+            のみ（システム設定 → プライバシーとセキュリティ → 画面収録）。
           </li>
         </ul>
       </div>
@@ -43,9 +44,18 @@ import DownloadButton from "./DownloadButton.astro";
           </li>
           <li class="flex gap-3">
             <span class="font-mono font-semibold text-accent">3</span>
-            <span>起動。初回のみ右クリック →『開く』を選ぶ場合があります。</span>
+            <span
+              >起動。初回のスクリーンショット時に画面収録の許可を求められます。許可したあと
+              <span class="tok">⌘Q</span> で一度終了して起動し直してください。</span
+            >
           </li>
         </ol>
+        <p class="mt-6 text-sm leading-relaxed text-subtle">
+          くわしい手順と使い方は<a
+            class="font-medium text-accent underline decoration-accent/30 underline-offset-2 hover:decoration-accent"
+            href={GUIDE_URL}>インストールと使い方の手順書</a
+          >にまとめています。
+        </p>
       </div>
     </div>
     <div class="mt-10 flex justify-center">

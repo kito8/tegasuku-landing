@@ -10,6 +10,9 @@ export const RELEASES_REPO = "kito8/tegasuku-releases";
 /** リリース一覧ページ（固定名アセットが無い場合のフォールバック先） */
 export const RELEASES_URL = `https://github.com/${RELEASES_REPO}/releases`;
 
+/** インストールと使い方の手順書（配布リポジトリの README として公開している） */
+export const GUIDE_URL = `https://github.com/${RELEASES_REPO}`;
+
 /**
  * 固定名アセットの永続 DL URL。
  * `latest` タグに `Tegasuku-arm64.dmg` を必ず併置する運用（docs/mac-release-plan.md）。
