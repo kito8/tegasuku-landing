@@ -2,7 +2,7 @@
 
 macOS アプリ **[tegasuku](https://github.com/kito8/tegasuku-releases)** のダウンロード LP。
 
-tegasuku は Zoom の説明会で共有されるスライドが切り替わった瞬間を自動でキャプチャし、PDF にまとめる Mac アプリ。画像は端末内（`~/Documents/ZoomCapture/`）にのみ保存され、外部送信は一切ない。アプリ本体のソースは非公開で、配布は [tegasuku-releases](https://github.com/kito8/tegasuku-releases) の Releases から行う。
+tegasuku は Zoom・Teams の説明会で共有されるスライドが切り替わった瞬間を自動でキャプチャし、PDF にまとめる Mac アプリ。画像は端末内（`~/Documents/ZoomCapture/`）にのみ保存され、外部送信は一切ない。アプリ本体のソースは非公開で、配布は [tegasuku-releases](https://github.com/kito8/tegasuku-releases) の Releases から行う。
 
 このリポジトリは LP のみを含む（アプリのコードは入っていない）。
 

@@ -44,7 +44,7 @@ export const SITE_URL = "https://tegasuku.pages.dev";
 
 /** meta description / OGP description */
 export const SITE_DESCRIPTION =
-  "Zoomの説明会で共有されるスライドを、切り替わった瞬間に自動でキャプチャ。クラウド送信なし、完全ローカルで完結するMacアプリ。";
+  "Zoom・Teams の説明会で共有されるスライドを、切り替わった瞬間に自動でキャプチャ。クラウド送信なし、完全ローカルで完結するMacアプリ。";
 
 /** OGP 画像（public/ 配下・1200x630） */
 export const OG_IMAGE = "/og-image.png";
