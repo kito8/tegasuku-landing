@@ -1,22 +1,35 @@
 ---
-const shots = [
+/*
+ * 画面イメージ。使い始めからの時系列で 3 枚（一覧 → 領域選択 → 撮影結果と PDF）。
+ * 1 枚目を幅いっぱいに見せる: 3 カラム等分だと 1 列あたり約 300px しか無く、
+ * アプリの UI が判読できない大きさになるため。
+ * 画像は src/assets 経由（astro:assets）にしてハッシュ付きで /_astro/ に入れる。
+ * public/_headers の immutable キャッシュが /_astro/* にしか効かないため。
+ */
+import { Picture } from "astro:assets";
+import sessions from "../assets/screenshots/sessions.png";
+import roi from "../assets/screenshots/roi.png";
+import capturePdf from "../assets/screenshots/capture-pdf.png";
+
+const lead = {
+  img: sessions,
+  alt: "説明会ごとのセッションがカード一覧で並んだホーム画面。各カードに日付と保存枚数が表示されている",
+  tag: "sessions",
+  caption: "セッションごとに整理",
+};
+
+const rest = [
   {
-    src: "/screenshots/roi.png",
-    alt: "スライド領域（ROI）を選択している画面",
+    img: roi,
+    alt: "共有ウィンドウを選び、スライド領域（ROI）を指定し終えたキャプチャ画面",
     tag: "roi",
     caption: "スライド領域を選択",
   },
   {
-    src: "/screenshots/capture.png",
-    alt: "自動キャプチャ中のサムネイル一覧画面",
+    img: capturePdf,
+    alt: "自動・手動の区別とタイムスタンプ付きでキャプチャ結果が並び、PDF 出力できる管理画面",
     tag: "capture",
-    caption: "自動でキャプチャ",
-  },
-  {
-    src: "/screenshots/manage-pdf.png",
-    alt: "撮影した画像を管理し PDF 出力する画面",
-    tag: "pdf",
-    caption: "PDF に書き出し",
+    caption: "自動で撮って PDF へ",
   },
 ];
 ---
@@ -29,18 +42,51 @@ const shots = [
         画面イメージ
       </h2>
     </header>
-    <div class="mt-12 grid gap-8 sm:grid-cols-3">
+
+    <figure class="card card-hover mt-12 overflow-hidden">
+      <div class="relative bg-bg-alt">
+        <Picture
+          src={lead.img}
+          alt={lead.alt}
+          formats={["avif", "webp"]}
+          fallbackFormat="png"
+          widths={[640, 976, 1952]}
+          sizes="(min-width: 640px) 976px, 100vw"
+          loading="lazy"
+          class="aspect-[3/2] w-full object-cover"
+        />
+        <div
+          class="pointer-events-none absolute inset-2.5 hidden sm:block"
+          aria-hidden="true"
+        >
+          <span class="roi-corner roi-tl" />
+          <span class="roi-corner roi-tr" />
+          <span class="roi-corner roi-bl" />
+          <span class="roi-corner roi-br" />
+        </div>
+      </div>
+      <figcaption
+        class="flex items-center gap-2 border-t border-line px-4 py-3 text-xs text-subtle"
+      >
+        <span class="tok">{lead.tag}</span>
+        <span>{lead.caption}</span>
+      </figcaption>
+    </figure>
+
+    <div class="mt-8 grid gap-8 sm:grid-cols-2">
       {
-        shots.map((s) => (
+        rest.map((s) => (
           <figure class="card card-hover overflow-hidden">
             <div class="relative bg-bg-alt">
-              <img
-                src={s.src}
+              <Picture
+                src={s.img}
                 alt={s.alt}
-                width="1280"
-                height="800"
+                formats={["avif", "webp"]}
+                fallbackFormat="png"
+                widths={[472, 944]}
+                sizes="(min-width: 640px) 472px, 100vw"
                 loading="lazy"
-                class="aspect-[16/10] w-full object-cover"
+                class="aspect-[3/2] w-full object-cover"
               />
               <div
                 class="pointer-events-none absolute inset-2.5 hidden sm:block"
