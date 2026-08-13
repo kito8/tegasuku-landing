@@ -1,43 +1,64 @@
-# Astro Starter Kit: Minimal
+# tegasuku-landing
 
-```sh
-npm create astro@latest -- --template minimal
+macOS アプリ **[tegasuku](https://github.com/kito8/tegasuku-releases)** のダウンロード LP。
+
+tegasuku は Zoom の説明会で共有されるスライドが切り替わった瞬間を自動でキャプチャし、PDF にまとめる Mac アプリ。画像は端末内（`~/Documents/ZoomCapture/`）にのみ保存され、外部送信は一切ない。アプリ本体のソースは非公開で、配布は [tegasuku-releases](https://github.com/kito8/tegasuku-releases) の Releases から行う。
+
+このリポジトリは LP のみを含む（アプリのコードは入っていない）。
+
+## 技術構成
+
+| 項目 | 内容 |
+| --- | --- |
+| フレームワーク | Astro 7（静的出力・アダプタなし・JS アイランドなし） |
+| スタイル | Tailwind CSS v4（`@tailwindcss/vite`／トークンは `src/styles/global.css` の `@theme`） |
+| ホスティング | Cloudflare Pages（`main` への push で自動デプロイ） |
+| Node | 22.12.0 以上 |
+
+## 開発
+
+```bash
+npm install
+npm run dev      # 開発サーバー
+npm run build    # dist/ に静的出力
+npm run preview  # ビルド結果を確認
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 構成
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```
+src/
+├── pages/index.astro     # 単一ページ。各セクションを縦に並べるだけ
+├── layouts/BaseLayout.astro
+├── components/           # Hero / ProblemSolution / Features / HowItWorks /
+│                         # Screenshots / Requirements / Faq / Footer / DownloadButton
+├── data/site.ts          # DL URL・バージョン・サイトメタの単一ソース
+└── styles/global.css     # Tailwind v4 の @theme トークン
+public/
+├── _headers              # Cloudflare Pages のセキュリティ／キャッシュヘッダ
+├── icon.png / apple-touch-icon.png / favicon.ico / og-image.png
+└── screenshots/          # roi.png / capture.png / manage-pdf.png
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+### `src/data/site.ts` について
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+公開 URL・DL URL・バージョンはすべてこのファイルに集約している。各コンポーネントはここから import する。`astro.config.mjs` の `site` もこの `SITE_URL` を参照するので、ドメイン変更時の修正は 1 箇所で足りる。
 
-Any static assets, like images, can be placed in the `public/` directory.
+`RELEASE_READY` は DL ボタンの状態を切り替えるフラグ。
 
-## 🧞 Commands
+- `false` — ボタンは非活性の「まもなく公開」表示
+- `true` — `DOWNLOAD_URL`（`releases/latest/download/Tegasuku-arm64.dmg` の永続 URL）へのリンクになる
 
-All commands are run from the root of the project, from a terminal:
+公証済み DMG が Releases に並ぶまでは `false` で運用する。
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## デプロイ
 
-## 👀 Want to learn more?
+Cloudflare Pages の Git 連携。`main` への push でビルドとデプロイが走る。
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+| 設定 | 値 |
+| --- | --- |
+| Build command | `npm run build` |
+| Build output directory | `dist` |
+| `NODE_VERSION` | `22` |
+
+`wrangler.toml` の `pages_build_output_dir` も `dist` を指している。

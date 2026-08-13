@@ -20,7 +20,7 @@ export const GUIDE_URL = `https://github.com/${RELEASES_REPO}`;
 export const DOWNLOAD_URL = `https://github.com/${RELEASES_REPO}/releases/latest/download/Tegasuku-arm64.dmg`;
 
 /** アプリのバージョン（package.json の version と揃える） */
-export const VERSION = "0.3.1";
+export const VERSION = "0.5.0";
 
 /** 作者名 */
 export const AUTHOR = "Koki Ito";
@@ -36,12 +36,15 @@ export const RELEASE_READY = false;
 /** アプリ名 */
 export const SITE_NAME = "tegasuku";
 
-/** 公開予定の URL（Cloudflare Pages, T6） */
+/**
+ * 公開 URL（Cloudflare Pages）。
+ * astro.config.mjs の `site` もここを参照するので、URL の変更はこの 1 箇所で足りる。
+ */
 export const SITE_URL = "https://tegasuku.pages.dev";
 
 /** meta description / OGP description */
 export const SITE_DESCRIPTION =
   "Zoomの説明会で共有されるスライドを、切り替わった瞬間に自動でキャプチャ。クラウド送信なし、完全ローカルで完結するMacアプリ。";
 
-/** OGP 画像（public/ 配下・当面プレースホルダー） */
+/** OGP 画像（public/ 配下・1200x630） */
 export const OG_IMAGE = "/og-image.png";
