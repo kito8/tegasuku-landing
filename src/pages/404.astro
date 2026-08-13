@@ -1,0 +1,36 @@
+---
+/*
+ * 404 ページ。Astro が dist/404.html を出力し、Cloudflare Pages がこれを
+ * 404 ステータスで配信する。これが無いと未知の URL に index.html が 200 で返る。
+ */
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_NAME } from "../data/site";
+---
+
+<BaseLayout
+  title="ページが見つかりません"
+  description="お探しのページは見つかりませんでした。"
+  noindex
+>
+  <main class="flex min-h-[70vh] items-center bg-bg">
+    <div class="mx-auto max-w-5xl px-6 py-20 sm:py-28">
+      <p class="eyebrow">404</p>
+      <h1
+        class="mt-4 text-3xl font-bold tracking-tight text-ink sm:text-4xl"
+      >
+        ページが見つかりません
+      </h1>
+      <p class="mt-5 max-w-xl text-base leading-relaxed text-subtle">
+        URL が変更されたか、入力に誤りがある可能性があります。
+      </p>
+      <a
+        href="/"
+        class="mt-10 inline-flex items-center justify-center gap-2 rounded-2xl border border-line bg-bg px-6 py-3 text-base font-semibold text-ink shadow-sm transition-colors hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+      >
+        {SITE_NAME} のトップへ戻る
+      </a>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

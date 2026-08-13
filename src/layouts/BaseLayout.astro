@@ -13,12 +13,20 @@ interface Props {
   title?: string;
   /** ページ固有の説明。省略時はサイト既定 */
   description?: string;
+  /**
+   * 404 など、リリース状況にかかわらず常に検索結果から除外したいページで true。
+   * true のときは canonical も出さない（自分自身を正典として宣言すべきページではない）。
+   */
+  noindex?: boolean;
 }
 
-const { title, description = SITE_DESCRIPTION } = Astro.props;
+const { title, description = SITE_DESCRIPTION, noindex = false } = Astro.props;
 const pageTitle = title ? `${title} — ${SITE_NAME}` : SITE_NAME;
 const canonical = new URL(Astro.url.pathname, SITE_URL).href;
 const ogImageUrl = new URL(OG_IMAGE, SITE_URL).href;
+
+// DMG 未公開の間はサイト全体を noindex にする（下のコメント参照）
+const isNoindex = noindex || !RELEASE_READY;
 ---
 
 <!doctype html>
@@ -30,13 +38,18 @@ const ogImageUrl = new URL(OG_IMAGE, SITE_URL).href;
 
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {/*
+      canonical を落とすのは 404 のような「自分自身を正典として宣言すべきでない」
+      ページだけ。RELEASE_READY 由来の一時的な noindex では canonical は残す。
+    */}
+    {!noindex && <link rel="canonical" href={canonical} />}
 
     {/*
       DMG 未公開の間はプレースホルダー画像と非活性 CTA しか無いので検索結果に出さない。
       RELEASE_READY を true にすると自動で外れる（消し忘れが起きない）。
+      404 ページは noindex prop で常に除外する。
     */}
-    {!RELEASE_READY && <meta name="robots" content="noindex" />}
+    {isNoindex && <meta name="robots" content="noindex" />}
 
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" href="/icon.png" />
