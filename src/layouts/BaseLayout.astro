@@ -1,6 +1,12 @@
 ---
 import "../styles/global.css";
-import { SITE_NAME, SITE_DESCRIPTION, SITE_URL, OG_IMAGE } from "../data/site";
+import {
+  SITE_NAME,
+  SITE_DESCRIPTION,
+  SITE_URL,
+  OG_IMAGE,
+  RELEASE_READY,
+} from "../data/site";
 
 interface Props {
   /** ページ固有のタイトル。省略時はアプリ名のみ */
@@ -11,6 +17,7 @@ interface Props {
 
 const { title, description = SITE_DESCRIPTION } = Astro.props;
 const pageTitle = title ? `${title} — ${SITE_NAME}` : SITE_NAME;
+const canonical = new URL(Astro.url.pathname, SITE_URL).href;
 const ogImageUrl = new URL(OG_IMAGE, SITE_URL).href;
 ---
 
@@ -23,6 +30,13 @@ const ogImageUrl = new URL(OG_IMAGE, SITE_URL).href;
 
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    {/*
+      DMG 未公開の間はプレースホルダー画像と非活性 CTA しか無いので検索結果に出さない。
+      RELEASE_READY を true にすると自動で外れる（消し忘れが起きない）。
+    */}
+    {!RELEASE_READY && <meta name="robots" content="noindex" />}
 
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" href="/icon.png" />
@@ -34,7 +48,7 @@ const ogImageUrl = new URL(OG_IMAGE, SITE_URL).href;
     <meta property="og:site_name" content={SITE_NAME} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={SITE_URL} />
+    <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:locale" content="ja_JP" />
 

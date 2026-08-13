@@ -1,6 +1,12 @@
-# Cloudflare Pages 設定（T6）。
-# デプロイ: `npm run build` で dist/ を生成後、`npx wrangler pages deploy dist`
-# （事前に `npx wrangler login` が必要 = Cloudflare アカウントでのログイン）。
+# Cloudflare Pages 設定。
+#
+# 通常のデプロイは Git 連携（main への push で自動ビルド）。この設定ファイルは
+# Pages のビルドからも読まれるので、出力先はダッシュボードではなくここで宣言する。
+#
+# 緊急時の手動デプロイのみ:
+#   npx wrangler login && npm run build && npx wrangler pages deploy --branch main
+# ※ pages_build_output_dir を設定済みなので、ディレクトリの位置引数（`... deploy dist`）は
+#   設定と衝突するため付けない。--branch を本番ブランチにしないと preview 側に上がる。
 name = "tegasuku"
 compatibility_date = "2024-11-01"
 pages_build_output_dir = "dist"
