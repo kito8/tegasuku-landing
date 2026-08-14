@@ -29,7 +29,7 @@ export const AUTHOR = "Koki Ito";
  * DMG がまだ公開されていない期間は false にして「まもなく公開」表示に切り替える。
  * リリース公開後に true にすると DL ボタンが実 DMG を指す（T7）。
  */
-export const RELEASE_READY = false;
+export const RELEASE_READY = true;
 
 /* --- サイトメタ（<head> / OGP 用） --- */
 
